@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <!-- <link rel="stylesheet" href="static\css\styles.css"> -->
+</head>
+
+<body>
+    <h1>MongoDB Flask ToDo App</h1>
+    <hr>
+    <div class="content">
+        <form method='POST' id="frm">
+            <p>
+                <b><label for="content">Todo Content</label></b>
+            </p>
+            <p>
+               <input type="text" placeholder="add todo..." name="content"> 
+            </p>
+            <p>
+                <b><label for="degree">Degree</label></b>
+            </p>
+            <p>
+                <input type="radio" name="degree" id="degree0" required value="important">
+                <label for="degree0">Important</label>
+            </p>
+            <p>
+                <input type="radio" name="degree" id="degree1" required value="unimportant">
+                <label for="degree1">Unimportant</label>
+            </p>
+            <button type="submit">Submit</button>
+        </form>
+        <!-- using for loop displaying list of todos -->
+        {% for todo in toos %}
+            <div class="todo">
+                <!-- display of todo content and degree of todo -->
+                <p>{{todo['content']}} <i>({{todo['degree']}}) </i></p>
+                <!-- delete functionality of todo -->
+                <form method="POST" action="{{url_for('delete', id=todo['_id'])}}">
+                    <input type="submit" value="remove" onclick="return confirm('Are you sure you want to remove this entry')">
+                </form>
+                
+            </div>
+        {% endfor %}
+    </div>
+    
+</body>
+
+</html>
