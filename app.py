@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 
 app = Flask("__name__")
 # Connection to Mongo DB
-client = MongoClient('') #place your connection string
+client = MongoClient("") # add connection string
 
 # func to get, store & display todos
 @app.route("/", methods=["GET", "POST"])
